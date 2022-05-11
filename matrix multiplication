@@ -1,0 +1,121 @@
+a = input()
+b = input()
+alist = eval(a)
+blist = eval(b)
+if type(alist[0]) == list and type(blist[0]) == list:
+    arows = len(alist)
+    acolumns = len(alist[0])
+    brows = len(blist)
+    bcolumns = len(blist[0])
+    if acolumns != brows:
+        print("matrizes não multiplicáveis")
+    else:
+        multiplications = []
+        elements = []
+        intermedium = []
+        output = []
+        sumn = 0
+        for i in range(0, arows):
+            for j in range(0, bcolumns):
+                for x in range(0, acolumns):
+                    multiplications.append(alist[i][x]*blist[x][j])
+        for f in range(0, len(multiplications)):
+            m = (f + 1) % acolumns
+            if m == 0:
+                sumn = sumn + multiplications[f]
+                elements.append(sumn)
+                soma = 0
+            if m != 0:
+                sumn = sumn + multiplications[f]
+        for g in range(0, len(elements)):
+            m = (g + 1) % brows
+            if m == 0:
+                intermedium.append(elements[g])
+                output.append(intermedium)
+                intermedium = []
+            if m != 0:
+                intermedium.append(elements[g])
+        print(output)
+if type(alist[0]) != list and type(blist[0]) == list:
+    arows = 1
+    acolumns = len(alist)
+    brows = len(blist)
+    bcolumns = len(blist[0])
+    if acolumns != brows:
+        print("matrizes não multiplicáveis")
+    else:
+        multiplications = []
+        sumn = 0
+        elements = []
+        output = []
+        for j in range(0, bcolumns):
+            for x in range(0, acolumns):
+                multiplications.append(alist[x]*blist[x][j])
+        for g in range(0, len(multiplications)):
+            m = (g + 1) % acolumns
+            if m == 0:
+                sumn = sumn + multiplications[g]
+                elements.append(sumn)
+                sumn = 0
+            if m != 0:
+                sumn = sumn + multiplications[g]
+        output = elements
+        print(output)
+if type(alist[0]) == list and type(blist[0]) != list:
+    arows = len(alist)
+    acolumns = len(alist[0])
+    brows = 1
+    bcolumns = len(blist)
+    if acolumns != brows:
+        print("matrizes não multiplicáveis")
+    else:
+        acolumns = 1
+        multiplications = []
+        elements = []
+        intermedium = []
+        output = []
+        sumn = 0
+        for i in range(0, arows):
+            for j in range(0, bcolumns):
+                multiplications.append(alist[i][0]*blist[j])
+        for f in range(0, len(multiplications)):
+            m = (f + 1) % acolumns
+            if m == 0:
+                sumn = sumn + multiplications[f]
+                elements.append(sumn)
+                sumn = 0
+            if m != 0:
+                sumn = sumn + multiplications[f]
+        for g in range(0, len(elements)):
+            m = (g + 1) % bcolumns
+            if m == 0:
+                intermedium.append(elements[g])
+                output.append(intermedium)
+                intermedium = []
+            if m != 0:
+                intermedium.append(elements[g])
+        print(output)
+if type(alist[0]) != list and type(blist[0]) != list:
+    arows = 1
+    acolumns = len(alist)
+    brows = 1
+    bcolumns = len(blist)
+    if acolumns != brows:
+        print("matrizes não multiplicáveis")
+    else:
+        acolumns = 1
+        aconstant = alist[0]
+        multiplications = []
+        elements = []
+        output = []
+        for x in range(0, bcolumns):
+            multiplications.append(aconstant*blist[x])
+        elements = multiplications
+        output = elements
+        print(output)
+        
+        
+        
+        
+        
+        
