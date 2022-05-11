@@ -1,0 +1,18 @@
+fibonacci = [0, 1, 1]
+sumn = 2
+n = int(input())
+if n == 0:
+    print([0], 0)
+if n == 1:
+    print(fibonacci, sumn)
+if n >= 2:
+    while n > fibonacci[len(fibonacci) - 1]:
+        element = fibonacci[len(fibonacci) -1] + fibonacci[len(fibonacci) -2]
+        fibonacci.append(element)
+        sumn = sumn + element
+        if n < fibonacci[len(fibonacci) - 1]:
+            sumn = sumn - fibonacci[len(fibonacci) - 1]
+            fibonacci.pop()
+            break
+    print(fibonacci, end = "\n")
+    print(sumn)
