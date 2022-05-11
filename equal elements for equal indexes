@@ -1,0 +1,22 @@
+a = input()
+b = input()
+alist = eval(a)
+blist = eval(b)
+m = True
+elements = []
+if len(alist) > len(blist):
+    for i in range(0, len(blist)):
+        if alist[i] == blist[i]:
+            elements.append(m)
+        else:
+            elements.append(not m)
+if len(alist) < len(blist):
+    for j in range(0, len(alist)):
+        if alist[j] == blist[j]:
+            elements.append(m)
+        else:
+            elements.append(not m)
+if True in elements:
+    print(m)
+else:
+    print(not m)
