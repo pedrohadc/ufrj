@@ -1,0 +1,11 @@
+a = input()
+b = input()
+alista = eval(a)
+blista = eval(b)
+atamanho = len(alista)
+btamanho = len(blista)
+soma = 0
+for i in range(0, atamanho):
+      vetor = (alista[i])*(blista[i])
+      soma = soma + vetor
+print(soma) 
