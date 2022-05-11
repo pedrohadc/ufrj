@@ -2,9 +2,11 @@ fibonacci = [0, 1, 1]
 sumn = 2
 n = int(input())
 if n == 0:
-    print([0], 0)
+    print([0], end = "\n")
+    print(0)
 if n == 1:
-    print(fibonacci, sumn)
+    print(fibonacci, end = "\n")
+    print(sumn)
 if n >= 2:
     while n > fibonacci[len(fibonacci) - 1]:
         element = fibonacci[len(fibonacci) -1] + fibonacci[len(fibonacci) -2]
