@@ -1,0 +1,49 @@
+n = input()
+nlist = eval(n)
+if type(nlist[0]) != list:
+    def onesquareddet(nlist):
+        determinant = 0
+        determinant = nlist[0]
+        print(determinant)
+        return determinant
+    if len(nlist) != 1:
+        print("there is no determinant for this matrix")
+    if len(nlist) == 1:
+        onesquareddet(nlist)
+if type(nlist[0]) == list:
+    def onesquareddet(nlist):
+        determinant = 0
+        determinant = nlist[0]
+        print(determinant)
+        return determinant
+    if len(nlist) != 1:
+        print("there is no determinant for this matrix")
+    if len(nlist) == 1:
+        onesquareddet(nlist)
+    def twosquareddet(nlist):
+        determinant = nlist[0][0]*nlist[1][1] - nlist[0][1]*nlist[1][0]
+        print(determinant)
+        return determinant
+    def threesquareddet(nlist):
+        fdeterminant = nlist[0][0]*nlist[1][1]*nlist[2][2]
+        sdeterminant = nlist[0][1]*nlist[1][2]*nlist[2][0]
+        tdeterminant = nlist[0][2]*nlist[1][0]*nlist[2][1]
+        fourthdeterminant = nlist[0][2]*nlist[1][1]*nlist[2][0]
+        fifthdeterminant = nlist[0][0]*nlist[1][2]*nlist[2][1]
+        sixthdeterminant = nlist[0][1]*nlist[1][0]*nlist[2][2] 
+        determinant = fdeterminant + sdeterminant + tdeterminant - fourthdeterminant - fifthdeterminant - sixthdeterminant
+        print(determinant)
+        return determinant
+    if len(nlist) == 2:
+        if len(nlist[0]) != 2:
+            print("there is no determinant for this matrix")
+        if len(nlist[0]) == 2:
+            twosquareddet(nlist)
+    if len(nlist) == 3:
+        if len(nlist[0]) != 3:
+            print("there is no determinant for this matrix")
+        if len(nlist[0]) == 3:
+            threesquareddet(nlist)
+    if len(nlist) > 3:
+        print("im not capable of :'(")
+        
