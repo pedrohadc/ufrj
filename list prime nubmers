@@ -1,0 +1,15 @@
+a = input()
+b = int(a)
+compostos = []
+todosnumeros = []
+for c in range(0, b + 1):
+    for d in range(2, c):
+        if (c % d) == 0:
+            compostos[-1:0] = [c]
+            break
+for e in range(0, b + 1):
+    todosnumeros[-1:0] = [e]
+primos = [x for x in todosnumeros if x not in compostos]
+tirar = [0, 1]
+primos2 = [x for x in primos if x not in tirar]
+print(primos2)
