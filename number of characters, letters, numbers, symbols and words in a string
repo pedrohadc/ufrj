@@ -1,0 +1,25 @@
+a = input()
+letters = []
+numbers = []
+everythingelse = []
+if "\\n" in a:
+    a = a.replace("\\n", "\n")
+if "\\r" in a:
+    a = a.replace("\\r", "\r")
+if "\\t" in a:
+    a = a.replace("\\t", "\t")
+if "\\b" in a:
+    a = a.replace("\\b", "\b")
+for i in range(len(a)):
+    if a[i] >= "a" and a[i] <= "z":
+        letters.append(a[i])
+    elif a[i] >= "A" and a[i] <= "Z":
+        letters.append(a[i])
+    elif a[i] >= "À":
+        letters.append(a[i])
+    elif a[i] >= "0" and a[i] <= "9":
+        numbers.append(a[i])
+    else:
+        everythingelse.append(a[i])
+print(len(a), len(letters), len(numbers), len(everythingelse), len(a.split()))
+        
