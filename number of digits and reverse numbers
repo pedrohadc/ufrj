@@ -1,0 +1,9 @@
+def numberOfDigits(x):
+    return int(len(str(x)))
+def reverseNumber(x):
+    m = list(x)
+    m.reverse()
+    m = "".join(m)
+    return int(m)
+n = input()
+print(((numberOfDigits(n), reverseNumber(n))))
