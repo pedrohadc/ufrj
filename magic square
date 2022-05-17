@@ -1,0 +1,42 @@
+def magicSquare(x):
+    m = sum(x[0])
+    for i in range(0, len(x[0])):
+        a = 0
+        a = sum(x[i])
+        if m != a:
+            return False
+    b = 0
+    for i in range(len(x[0])):
+        for j in range(len(x)):
+            b = b + x[i][j]
+            if (j + 1) % len(x) == 0:
+                if b != m:
+                    return False
+                else:
+                    b = 0
+    c = 0
+    for i in range(len(x)):
+        c = c + x[i][i]
+        if (i + 1) % len(x) == 0:
+            if c != m:
+                return False
+            else:
+                c = 0
+    d = 0
+    for i in range(len(x)):
+        d = d + x[i][len(x) - i - 1]
+        if (i + 1) % len(x) == 0:
+            if d != m:
+                return False
+            else:
+                d = 0
+    return True
+                    
+z = input()
+n = eval(z)
+if len(n) < 2:
+    print(True)
+elif len(n) != len(n[0]):
+    print("number of rows and columns need to be equal")
+else:
+    print(magicSquare(n))
