@@ -1,0 +1,49 @@
+
+j = input()
+i = eval(j)
+code = i[0]
+n = i[1]
+key = i[2]
+output = ""
+if code == True:
+    for i in range(len(n)):
+        if n[i] >= "a" and n[i] <= "z" or n[i] == " ":
+            alphabet = "abcdefghijklmnopqrstuvwxyz "
+            letter = alphabet.index(n[i])
+            m = letter + key
+            if letter + key > 26:
+                m = (letter + key) % 27
+            if letter + key < -27:
+                m = (letter + key) % 27
+            output = output + alphabet[m]
+        if n[i] >= "A" and n[i] <= "Z":
+            alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+            letter = alphabet.index(n[i])
+            m = letter + key
+            if letter + key > 26:
+                m = (letter + key) % 27
+            if letter + key < -27:
+                m = (letter + key) % 27
+            output = output + alphabet[m]
+    print(output)
+if code == False:
+    for i in range(len(n)):
+        if n[i] >= "a" and n[i] <= "z" or n[i] == " ":
+            alphabet = "abcdefghijklmnopqrstuvwxyz "
+            letter = alphabet.index(n[i])
+            m = letter - key
+            if m < -27:
+                m = m % 27
+                m = -m
+            output = output + alphabet[m]
+        if n[i] >= "A" and n[i] <= "Z":
+            alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+            letter = alphabet.index(n[i])
+            m = letter - key
+            if m < -27:
+                m = m % 27
+                m = -m
+            output = output + alphabet[m]
+    print(output)
+            
+  
