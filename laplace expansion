@@ -1,0 +1,41 @@
+import copy
+def onesqureddet(x):
+    determinant1 = x[0]
+    return determinant1
+def twosquareddet(x):
+    determinant2 = x[0][0]*x[1][1] - x[0][1]*x[1][0]
+    return determinant2
+def determinant(x):
+    z_copy = x.copy()
+    z_deepcopy = copy.deepcopy(z_copy)
+    if len(x) == 2:
+        determinant3 = twosquareddet(x)
+        return determinant3
+    if len(x) > 2:
+        laplacedeterminant = 0
+        x.pop(0)
+        x_copy = x.copy()
+        x_deepcopy = copy.deepcopy(x_copy)
+        for i in range(0, len(x) + 1):
+            for j in range(0, len(x)):
+                y = x[j]
+                y.pop(i)
+                if len(x[len(x_deepcopy) - 1]) == len(x_deepcopy):
+                    laplacedeterminant = laplacedeterminant + determinant(x)*z_deepcopy[0][i]*((-1)**(2 + i))
+                    x = copy.deepcopy(x_deepcopy)
+        return laplacedeterminant
+n = eval(input())
+if type(n[0]) != list:
+    if len(n) == 1:
+        print(onesqureddet(n))
+    if len(n) != 1:
+        print("there is no determinant for this matrix")
+if type(n[0]) == list:
+    if len(n) == 1:
+        print(n[0][0])
+    elif len(n[0]) != len(n):
+        print("there is no determinant for this matrix")
+    elif len(n[0]) == len(n):
+        print(determinant(n))
+        
+        
