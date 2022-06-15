@@ -1,0 +1,15 @@
+def binarySearch(v, x, i, j):
+    if i > j: return -1
+    m = (i + j)//2
+    if v[m] < x:
+        i = m + 1
+        return binarySearch(v, x, i, j)
+    if v[m] > x:
+        j = m - 1
+        return binarySearch(v, x, i, j)
+    if v[m] == x: return m
+    
+v = eval(input())
+x = eval(input())
+
+print(binarySearch(v, x, 0, len(v) - 1))
