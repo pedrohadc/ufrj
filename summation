@@ -1,0 +1,14 @@
+def summation(i, n, a, b, c):
+    global sumn
+    if i == n:
+        sumn = sumn + ((-1)**(c + i))*((1 + a*i)/(3*b**i))
+        return sumn
+    if i < n:
+        sumn = sumn + ((-1)**(c + i))*((1 + a*i)/(3*b**i))
+        return summation(i + 1, n, a, b, c)
+        
+sumn = 0        
+        
+n, a, b, c = eval(input())
+
+print("%.3f" % summation(1, n, a, b, c))
