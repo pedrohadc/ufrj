@@ -1,0 +1,83 @@
+def sort(n, i):
+    if i >= len(n):
+        return n
+    minima = n[i]
+    for j in range(i, len(n)):
+        if n[j] < minima:
+            minima = n[j]
+    for k in range(i, len(n)):
+        if n[k] == minima:
+            x = k
+    print(x, minima)
+    n.pop(x)
+    n[i:i] = [minima]
+    print(n)
+    return sort(n, i + 1)
+
+print(sort(eval(input()), 0))
+    
+
+
+
+#Implementar uma classe de matriz. O formato da matriz que deve ser impresso é igual ao apresentado na aula Lista II, onde n é o número de linhas e m o número de colunas. 
+
+#Essa classe tem que ter os métodos abaixo:
+
+#class Matriz:    
+#
+#    def __init__(self, n,m,v):
+#
+#   def __add__(self,other):
+#
+#    def __sub__(self,other):
+#
+#    def __mul__(self,other):
+#
+#   def __repr__(self):
+
+#Exemplo de uso: 
+
+#a = Matriz(2,2,[1,2,3,4])
+
+#b = Matriz(2,2,[1,0,1,0])
+
+#print(a)
+
+#print (a+b)
+
+#print (b-a)
+
+#print(a*b)
+
+#Saída:
+
+#[[1,2],[3,4]]
+
+#[[2,2],[4,4]]
+
+#[[0,-2],[-2,-4]]
+
+#[[3,0],[7,0]]
+
+#Ex:
+
+#Input: (2,2,[1,2,3,4])+(2,2,[1,0,1,0])
+
+#Output: [[2,2],[4,4]]
+
+#Input: (2,2,[1,2,3,4])-(2,2,[1,0,1,0])
+
+#Output: [[0,2],[2,4]]
+
+
+
+#Input: (2,2,[1,2,3,4])*(2,2,[1,0,1,0])
+
+#Output: [[3,0],[7,0]]
+
+#Observações: 
+#n, m e os elementos do list v são todos inteiros. 
+#n e m são ≥1. 
+#O numero de elementos de v é n*m.
+#As matrizes quando somadas ou subtraídas tem sempre o mesmo tamanho
+#As matrizes quando multiplicadas possuem o número de linhas e colunas coerentes com a multiplicação.
