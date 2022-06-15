@@ -1,0 +1,22 @@
+def divisor(n):
+    div_set = set()
+    for i in range(1, n + 1):
+        if n % i == 0:
+            div_set.add(i)
+    return div_set
+
+def commondivisor(args):
+    xset = divisor(args[0])
+    if len(args) == 1:
+        return xset
+    for i in range(1, len(args)):
+        yset = divisor(args[i])
+        xset = xset.intersection(yset)
+    return xset
+
+
+numbers = eval(input())
+
+
+print(commondivisor([x for x in numbers]))
+
