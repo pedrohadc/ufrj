@@ -1,0 +1,14 @@
+def division(a, b):
+    global result
+    if a >= b:
+        a = a - b
+        result = result + 1
+        return division(a, b)
+    if a < b: return result
+    
+result = 0
+
+a = eval(input())
+b = eval(input())
+
+print((division(a, b)))
