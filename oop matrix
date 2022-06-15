@@ -1,0 +1,116 @@
+class Matriz:
+    def __init__(self, m, n, v):
+        self.m = m
+        self.n = n 
+        self.v = v
+        self.matrix = []
+        self.l = []
+        self.coef = self.v[:]
+        for i in range(self.m):
+            for j in range(self.n):
+                if j == self.n - 1:
+                    self.l.append(self.coef[j])
+                    for x in range(self.n):
+                        del self.coef[0]
+                else:
+                    self.l.append(self.coef[j])
+            self.matrix.append(self.l)
+            self.l = []
+            
+            
+    def __repr__(self): return str(self.matrix)
+    
+    
+    def __add__(self, other):
+        if self.m != other.m: return "operation not supported"
+        if self.n != other.n: return "operation not supported"
+        self.ncoef = []
+        for i in range(len(self.v)):
+            self.number = self.v[i] + other.v[i]
+            self.ncoef.append(self.number)
+        return Matriz(self.m, self.n, self.ncoef).matrix
+
+
+    def __sub__(self, other):
+        if self.m != other.m: return "operation not supported"
+        if self.n != other.n: return "operation not supported"
+        self.ncoef = []
+        for i in range(len(self.v)):
+            self.number = self.v[i] - other.v[i]
+            self.ncoef.append(self.number)
+        return Matriz(self.m, self.n, self.ncoef).matrix
+        
+        
+    def __mul__(self, other):
+        if self.n != other.m: return "operation not supported"
+        coef = []
+        sumn = 0
+        for i in range(len(self.matrix)):
+            for j in range(len(other.matrix[0])):
+                for n in range(len(self.matrix[0])):
+                    if n == len(self.matrix[0]) - 1:
+                        sumn = sumn + self.matrix[i][n]*other.matrix[n][j]
+                        coef.append(sumn)
+                        sumn = 0
+                    else: sumn = sumn + self.matrix[i][n]*other.matrix[n][j]
+        return Matriz(self.m, other.n, coef).matrix
+
+
+#a = Matriz(5, 4, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 1, 1, 1, 1, 1, 1])
+#b = Matriz(5, 4, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 1, 1, 1, 1, 1, 1])
+
+
+#print(a)
+#print(b)
+#print(a + b)
+#print(a - b)
+#print(a * b)
+                
+a = input() #"(2,2,[1,2,3,4])+(2,2,[1,0,1,0])" #input()
+b = a[:]
+f = []
+
+
+for x in a:
+    if x == "(":
+        for i in range(len(a)):
+            if a[i] == x:
+                k = i
+                break
+        for y in a:
+            if y == ")": 
+                for j in range(len(a)):
+                    if a[j] == y:
+                        l = j
+                        break
+                break
+        inp = a[k:l + 1]
+        f.append(eval(inp))
+        a = a[l + 1:]
+        
+        
+if len(f) > 1:
+    op = ""
+    for x in b:
+        if x == ")":
+            for i in range(len(b)):
+                if b[i] == x:
+                    k = i
+                    op = op + b[k + 1: k + 2]
+                    break
+            break
+    p, o, i = f[0][0], f[0][1], f[0][2]
+    q = Matriz(p, o, i)
+    p, o, i = f[1][0], f[1][1], f[1][2]
+    w = Matriz(p, o, i)
+    if op == "+":
+        print(q + w)
+    if op == "-":
+        print(q - w)
+    if op == "*":
+        print(q * w)
+        
+        
+else: 
+    p, o, i = f[0][0], f[0][1], f[0][2]
+    print(Matriz(p, o, i))
