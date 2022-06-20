@@ -1,0 +1,70 @@
+class Polinomio:
+    def __init__(self, coeficientes = []):
+        self.coeficientes = coeficientes
+    
+    def __setitem__(self, grau, coeficiente):
+        while len(self.coeficientes) < grau:
+            self.coeficientes.append(0)
+        self.coeficientes[grau] = coeficiente
+    
+    def __getitem__(self, grau):
+        if len(self.coeficientes) < grau: return 0
+        return self.coeficientes[grau]
+        
+    def grau(self): return len(self.coeficientes)
+    
+    def __mul__(self, p):
+        while len(p.coeficientes) < len(self.coeficientes):
+            p.coeficientes.append(0)
+        while len(p.coeficientes) > len(self.coeficientes):
+            self.coeficientes.append(0)
+        result = []
+        for i in range(len(self.coeficientes) + len(p.coeficientes)):
+            result.append(0)
+        for i in range(len(self.coeficientes)):
+            for j in range(len(p.coeficientes)):
+                result[i + j] = result[i + j] + self.coeficientes[i]*p.coeficientes[j]
+        while result[len(result) - 1] == 0:
+            result.pop()
+        return Polinomio(result)
+    
+    def __add__(self, p):
+        while len(p.coeficientes) < len(self.coeficientes):
+            p.coeficientes.append(0)
+        while len(p.coeficientes) > len(self.coeficientes):
+            self.coeficientes.append(0)
+        result = []
+        for i in range(len(self.coeficientes)):
+            result.append(self.coeficientes[i] + p.coeficientes[i])
+        return Polinomio(result)
+        
+    def __sub__(self, p):
+        while len(p.coeficientes) < len(self.coeficientes):
+            p.coeficientes.append(0)
+        while len(p.coeficientes) > len(self.coeficientes):
+            self.coeficientes.append(0)
+        result = []
+        for i in range(len(self.coeficientes)):
+            result.append(self.coeficientes[i] - p.coeficientes[i])
+        return Polinomio(result)
+        
+    def avalia(self, x):
+        sumn = 0
+        for i in range(len(self.coeficientes)):
+            sumn = sumn + (self.coeficientes[i])*(x**i)
+        return sumn
+        
+p = eval(input())
+q = eval(input())
+x = eval(input())
+
+#p = [1,2,0,0.5]
+
+#q = [0,-1,2]
+
+#x = 3
+
+
+
+print(Polinomio(p).avalia(x), Polinomio(q).avalia(x), (Polinomio(p) + Polinomio(q)).avalia(x), (Polinomio(p) - Polinomio(q)).avalia(x), (Polinomio(p) * Polinomio(q)).avalia(x))
+            
