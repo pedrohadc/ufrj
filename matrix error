@@ -1,0 +1,245 @@
+class Matriz:
+    def __init__(self, n,m,v):
+        "Inicia a matriz. Deve levantar erro:"
+        "se n e m não são inteiros positivos (TypeError ou ValueError)"
+        "Deve levantar erro se v não é um list de numeros de tamanho adequado (TypeError ou ValueError)"
+        self.__n = n
+        self.__m = m
+        self.__v = v
+        if len(v) != n*m:
+            raise ValueError
+        else:
+            self.__Matrix = []
+            self.__intermedium = []
+            self.__vcopy = v[:]
+            for i in range(n):
+                for j in range(m):
+                    self.__intermedium.append(self.__vcopy[j])
+                self.__Matrix.append(self.__intermedium)
+                self.__intermedium = []
+                for j in  range(m):
+                    self.__vcopy.pop(0)
+        
+    
+    def __add__(self,other):
+        "Soma matrizes. Elas podem ter tamanhos diferentes"
+        self.__res = []
+        if self.__n == other.__n and self.__m == other.__m:
+            for i in range(self.__n*self.__m):
+                self.__res.append(self.__v[i] + other.__v[i])
+            return Matriz(self.__n, self.__m, self.__res)
+        if self.__n > other.__n:
+            if self.__m > other.__m:
+                while other.__n < self.__n:
+                    other.add_row([0]*other.__m)
+                while other.__m < self.__n:
+                    other.add_col([0]*other.__n)
+                for i in range(self.__n*self.__m):
+                    self.__res.append(self.__v[i] + other.__v[i])
+                return Matriz(self.__n, self.__m, self.__res)
+            if self.__m < other.__m:
+                while other.__n < self.__n:
+                    other.add_row([0]*other.__m)
+                while self.__m < other.__m:
+                    self.add_col([0]*self.__n)
+                for i in range(self.__n*self.__m):
+                    self.__res.append(self.__v[i] + other.__v[i])
+                return Matriz(self.__n, self.__m, self.__res)
+        if self.__n < other.__n:
+            if self.__m > other.__m:
+                while other.__n > self.__n:
+                    self.add_row([0]*self.__m)
+                while other.__m < self.__n:
+                    other.add_col([0]*other.__n)
+                for i in range(self.__n*self.__m):
+                    self.__res.append(self.__v[i] + other.__v[i])
+                return Matriz(self.__n, self.__m, self.__res)
+            if self.__m < other.__m:
+                while self.__n < other.__n:
+                    self.add_row([0]*self.__m)
+                while self.__m < other.__m:
+                    self.add_col([0]*self.__n)
+                for i in range(self.__n*self.__m):
+                    self.__res.append(self.__v[i] + other.__v[i])
+                return Matriz(self.__n, self.__m, self.__res)
+                
+
+    def __sub__(self,other):
+        "Subtrai matrizes. Elas podem ter tamanhos diferentes"
+        self.__res = []
+        if self.__n == other.__n and self.__m == other.__m:
+            for i in range(self.__n*self.__m):
+                self.__res.append(self.__v[i] - other.__v[i])
+            return Matriz(self.__n, self.__m, self.__res)
+        if self.__n > other.__n:
+            if self.__m > other.__m:
+                while other.__n < self.__n:
+                    other.add_row([0]*other.__m)
+                while other.__m < self.__n:
+                    other.add_col([0]*other.__n)
+                for i in range(self.__n*self.__m):
+                    self.__res.append(self.__v[i] - other.__v[i])
+                return Matriz(self.__n, self.__m, self.__res)
+            if self.__m < other.__m:
+                while other.__n < self.__n:
+                    other.add_row([0]*other.__m)
+                while self.__m < other.__m:
+                    self.add_col([0]*self.__n)
+                for i in range(self.__n*self.__m):
+                    self.__res.append(self.__v[i] - other.__v[i])
+                return Matriz(self.__n, self.__m, self.__res)
+        if self.__n < other.__n:
+            if self.__m > other.__m:
+                while other.__n > self.__n:
+                    self.add_row([0]*self.__m)
+                while other.__m < self.__n:
+                    other.add_col([0]*other.__n)
+                for i in range(self.__n*self.__m):
+                    self.__res.append(self.__v[i] - other.__v[i])
+                return Matriz(self.__n, self.__m, self.__res)
+            if self.__m < other.__m:
+                while self.__n < other.__n:
+                    self.add_row([0]*self.__m)
+                while self.__m < other.__m:
+                    self.add_col([0]*self.__n)
+                for i in range(self.__n*self.__m):
+                    self.__res.append(self.__v[i] - other.__v[i])
+                return Matriz(self.__n, self.__m, self.__res)
+        
+
+    def __mul__(self,other):
+        "Multiplica matrizes. Levanta erro se as matrizes não tem tamanho adequado (ValueError)"
+        if self.__m != other.__n:
+            raise ValueError
+        else:
+            sumn = 0
+            self.__res = []
+            for i in range(self.__n):
+                for j in range(other.__m):
+                    for k in range(self.__m):
+                        if k == self.__m - 1:
+                            sumn = sumn + self.__Matrix[i][k]*other.__Matrix[k][j]
+                            self.__res.append(sumn)
+                            sumn = 0
+                        else:
+                            sumn = sumn + self.__Matrix[i][k]*other.__Matrix[k][j]
+            return Matriz(self.__n, other.__m, self.__res)
+
+    def __getitem__(self,key):
+        "Retorna o valor de um coeficiente da matriz."
+        "key deve ser uma tupla de dois inteiros e deve levantar erro se key não é adequada (TypeError ou IndexError)"
+        if key[0] > self.__n or key[0] < 1 or key[1] > self.__m or key[1] < 1:
+            raise IndexError
+        else: return self.__Matrix[key[0] - 1][key[1] - 1]
+
+    def __setitem__(self,key, x):
+        "Seta o valor de um coeficiente da matriz."
+        "key deve ser uma tupla de dois inteiros e deve levantar erro se key não é adequada (TypeError ou IndexError)"
+        if key[0] > self.__n or key[0] < 1 or key[1] > self.__m or key[1] < 1:
+            raise IndexError
+        else:
+            self.__Matrix[key[0] - 1][key[1] - 1] = x
+
+    def add_row(self,r):
+        "Adiciona uma nova linha na matriz (no final). Levanta erro se r não é adequado (TypeError ou ValueError)"
+        if len(r) != self.__m:
+            raise ValueError
+        else:
+            for i in range(len(r)):
+                self.__v.append(r[i])
+            self.__n = self.__n + 1
+            self.__Matrix = Matriz(self.__n, self.__m, self.__v)
+
+    def add_col(self,c):
+        "Adiciona uma nova coluna na matriz (no final). Levanta erro se c não é adequado (TypeError ou ValueError)"
+        if len(c) != self.__n:
+            raise ValueError
+        else:
+            for i in range(len(c)):
+                self.__v.insert(self.__m*(i + 1) + i, c[i])
+            self.__m = self.__m + 1
+            self.__Matrix = Matriz(self.__n, self.__m, self.__v)
+
+    def __repr__(self):
+        "Imprime a matriz"
+        return str(self.__Matrix)
+
+    def det(self):
+        "Retorna a determinante da matriz se a matriz for quadrada, caso contrário, levanta erro (TypeError)"
+        def twosquared(x):
+            return (x[0][0]*x[1][1] - x[0][1]*x[1][0])
+        
+        def onesquared(x):
+            return x[0]
+        
+        def determinant(x): 
+            if len(x) == 1: return onesquared(x)
+            if len(x) == 2: return twosquared(x)
+            
+            self.__MatrixCopy = []
+            self.__MatrixC = []
+            for i in range(len(x)):
+                a = x[i][:]
+                self.__MatrixCopy.append(a)
+                self.__MatrixC.append(a)
+            self.__MatrixCopy.pop(0)
+            sumn = 0
+            for i in range(len(self.__MatrixCopy[0])):
+                for j in range(len(self.__MatrixCopy)):
+                    self.__MatrixCopy[j].pop(i)
+                sumn = sumn + x[0][i]*(-1)**(i)*determinant(self.__MatrixCopy)
+                self.__MatrixCopy = []
+                for i in range(len(self.__MatrixC)):
+                    f = x[i][:]
+                    self.__MatrixCopy.append(f)
+                self.__MatrixCopy.pop(0)
+            
+            return sumn
+                
+            
+        if self.__n != self.__m:
+            raise TypeError
+        else: return determinant(self.__Matrix)
+
+    def __linhas(self):
+        "retorna o número de linhas da matriz"
+        return len(self.__Matrix)
+
+    def __cols(self):
+        "retorna o número de colunas da matriz"
+        return len(self.__Matrix[0])
+
+    n = property(__linhas)
+    m = property(__cols)
+    
+#a = Matriz(3, 4, [1, 2, 3, 4 , 5, 6, 7, 8, 9, 10, 11, 12])
+#b = Matriz(4, 3, [1, 2, 3, 4 , 5, 6, 7, 8, 9, 10, 11, 12])
+#print(a)
+#print(b)
+#print(a * b)
+
+#b.add_row([0, 0, 0])
+#print(b)
+
+
+a = input()
+
+for i in range(len(a)):
+    if a[i] == "+" or a[i] == "-" or a[i] == "*":
+        b = eval(a[0:i])
+        b = Matriz(b[0], b[1], b[2])
+        c = eval(a[i + 1:])
+        c = Matriz(c[0], c[1], c[2])
+        if a[i] == "+":
+            print(b + c)
+        if a[i] == "-":
+            print(b - c)
+        if a[i] == "*":
+            print(b * c)
+
+if a[0:3] == "det":
+    b = eval(a[3:])
+    b = Matriz(b[0], b[1], b[2])
+    print(b.det())
+        
+    
